@@ -33,6 +33,13 @@ public class MovieNameGenerator {
         // 메서드에서 출력과정을 처리해두면 나중에 어디서 출력되는지 찾아야하는 번거로움이 있음
         // 기능을 제외한 모든 출력은 main문 안에서 해결할 것
         for (String movieName : movieInfos) System.out.println(movieName);
+
+        System.out.println("[System] 프로그램을 종료 시퀀스 : - 입력");
+        while (true) {
+            String breakPoint = br.readLine();
+            if (breakPoint.equals("-")) break;
+            else System.out.println("[System] 프로그램을 종료하려면 - 입력 후 엔터를 입력해주세요 ");
+        }
     }
 
 
