@@ -2,14 +2,9 @@
 ## 내가 편하려고 만들어둔 기능들
 
 
-Dillinger is a cloud-enabled, mobile-ready, offline-storage compatible,
-AngularJS-powered HTML5 Markdown editor.
-
-- Type some Markdown on the left
-- See HTML in the right
-- ✨Magic ✨
-
-## MovieNameGenerator (영화 이름 생성기)
+ ##
+ ##
+## 1. MovieNameGenerator (영화 이름 생성기)
 
 - 영화 제목을 `[영화제목]([영화 영문 제목], [영화 출시 년도])` 순으로 기록해두고 싶은데 매번 검색하고 긁어오기 귀찮음
 - 그래서 크롤링해서 내가 원하는대로 조합해주는 검색기 만듦
