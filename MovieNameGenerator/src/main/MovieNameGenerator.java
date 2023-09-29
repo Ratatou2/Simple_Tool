@@ -9,14 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieNameGenerator {
-    public static String movieTextFileName = "movieNameList.txt";  // 검색할 영화 이름 입력할 파일
-    public static String originalUrl = "https://search.naver.com/search.naver?query=영화+";
-    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static String movieTextFileName = "movieNameList.txt";  // 검색할 영화 이름 입력할 텍스트 파일
+    public static String originalUrl = "https://search.naver.com/search.naver?query=영화+";  // 네이버 기본 영화 검색 URL
 
 
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         System.out.println("[System][영화 이름 생성기]");
+
         createTextFile();  // 파일 생성
+        
         System.out.println("[System] 생성된 메모장에 검색하고자 하는 영화 제목을 입력하고 저장한 뒤 -를 입력할 것");
 
         while (true) {
@@ -25,13 +28,11 @@ public class MovieNameGenerator {
             else System.out.println("[System] -가 아닙니다. 다시 입력하세요 : ");
         }
 
-        List<String> movieInfos = readTextFile();  // 텍스트 파일에서 영화 정보 읽어오기
+        List<String> movieInfos = readTextFile();  // 텍스트 파일에서 검색하려는 영화 제목 읽어오기
 
-        // 메서드에서 출력과정을 해두면 나중에 어디서 출력되는지 찾아야하는 번거로움이 있음
+        // 메서드에서 출력과정을 처리해두면 나중에 어디서 출력되는지 찾아야하는 번거로움이 있음
         // 기능을 제외한 모든 출력은 main문 안에서 해결할 것
-        for (String movieName : movieInfos) {
-            System.out.println(movieName);
-        }
+        for (String movieName : movieInfos) System.out.println(movieName);
     }
 
 
@@ -47,8 +48,8 @@ public class MovieNameGenerator {
         try {  // 파일 생성 시도
             if (fileToDelete.createNewFile()) System.out.println("[createTextFile][CreateSuccess] 새 파일 생성 성공: " + movieTextFileName);
             else System.err.println("[createTextFile][CreateFail] 새 파일 생성 실패: " + movieTextFileName);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -56,13 +57,12 @@ public class MovieNameGenerator {
     // 텍스트 파일 읽어오기
     public static List<String> readTextFile() throws FileNotFoundException {
         BufferedReader br = new BufferedReader(new FileReader(movieTextFileName));
-
         List<String> movieInfos = new ArrayList<String>();
 
         try {
             String movieName;
             while ((movieName = br.readLine()) != null) {
-                movieInfos.add(movieNameGenerator(movieName.trim()));
+                movieInfos.add(movieNameGenerator(movieName.trim()));  // 영화 제목
             }
         } catch (IOException e) {
             System.err.println("[readTextFile][IOException] 파일 읽기 중 오류 발생: " + e.getMessage());
@@ -70,6 +70,7 @@ public class MovieNameGenerator {
 
         return movieInfos;
     }
+
 
     // 영화 이름 생성기
     public static String movieNameGenerator(String findMovieName) {
