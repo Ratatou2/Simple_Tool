@@ -91,6 +91,7 @@ public class MovieNameGenerator {
 
             // 페이지 정보 크롤링
             Connection conn = Jsoup.connect(url);
+            Thread.sleep(500);  // 페이지 다 불러오기도 전에 읽어들이니 여기서 터짐 (interval 줌)
             Document document = conn.get();
 
             // String 정보 get
